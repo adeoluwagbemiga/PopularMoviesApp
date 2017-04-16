@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:id="@+id/movie_backdrop"
-        android:layout_weight="4"
-        android:contentDescription="Movie Poster"
         android:scaleType="fitXY"
-        android:layout_margin="8dp" />
+        android:layout_margin="8dp"
+        android:layout_weight="4"
+        android:contentDescription="Movie Poster" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/scrollView"
+        android:layout_height="wrap_content"
         android:layout_weight="3">
 
         <LinearLayout
@@ -29,8 +29,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Small Text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Original Title"
                 android:id="@+id/movie_title"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Small Text"
+                android:text="Overview"
                 android:id="@+id/overview"
                 android:layout_marginTop="8dp"
                 android:inputType="textMultiLine"
@@ -55,7 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Small Text"
+                    android:text="Release Date"
                     android:id="@+id/release_date"
                     android:fontFamily="sans-serif"
                     android:textColor="@android:color/black"
@@ -65,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Small Text"
+                    android:text="Vote Average"
                     android:id="@+id/vote_average"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
@@ -74,14 +74,7 @@
                     android:layout_marginRight="8dp"
                     android:layout_marginLeft="4dp" />
 
-                <!--<ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/starRating"
-                    android:layout_toLeftOf="@+id/vote_average"
-                    android:layout_marginRight="4dp"
-                    android:src="@android:drawable/btn_star_big_on"
-                    android:contentDescription="@string/star_desc" />-->
+
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

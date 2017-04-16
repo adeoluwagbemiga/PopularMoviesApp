@@ -62,8 +62,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
         void bind(int index){
             Movie movie = list.get(index);
-            Picasso.with(context).load(movie.getPosterImage())
-                    .resize(185, 195).into(poster);
+            Picasso.with(context).load(movie.getPosterUrl())
+                    .resize(185, 200).into(poster);
         }
 
         @Override

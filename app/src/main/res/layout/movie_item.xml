@@ -8,14 +8,14 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/poster_padding">
+        android:padding="3dp">
 
         <ImageView
             android:id="@+id/rv_image"
             android:layout_width="185dp"
-            android:layout_height="195dp"
+            android:layout_height="200dp"
             android:contentDescription="Movie Poster"
-            android:background="@color/list_item_background"
+            android:background="@color/background"
             android:scaleType="fitXY" />
     </LinearLayout>
 

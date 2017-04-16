@@ -12,9 +12,9 @@ public class Movie implements Parcelable {
     private double viewerRatings;
     private String overview;
     private String releasedDate;
-    private String posterImage;
+    private String posterUrl;
     private String backdropUrl;
-    private final static String BASE_URL = "https://image.tmdb.org/t/p/w185";
+    private final static String POSTER_URL = "https://image.tmdb.org/t/p/w185";
     private final static String BACKDROP_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
     public Movie(String title, double ratings,
@@ -23,8 +23,8 @@ public class Movie implements Parcelable {
         viewerRatings = ratings;
         overview = summary;
         releasedDate = date;
-        posterImage = BASE_URL + relativePath;
-        backdropUrl = BACKDROP_IMAGE_URL + relativePath;
+        posterUrl = POSTER_URL + relativePath;
+        backdropUrl = POSTER_URL + relativePath;
     }
 
     protected Movie(Parcel in) {
@@ -32,7 +32,7 @@ public class Movie implements Parcelable {
         viewerRatings = in.readDouble();
         overview = in.readString();
         releasedDate = in.readString();
-        posterImage = in.readString();
+        posterUrl = in.readString();
         backdropUrl = in.readString();
     }
 
@@ -60,8 +60,8 @@ public class Movie implements Parcelable {
         return releasedDate;
     }
 
-    public String getPosterImage() {
-        return posterImage;
+    public String getPosterUrl() {
+        return posterUrl;
     }
 
     public String getBackdropUrl() {
@@ -84,7 +84,7 @@ public class Movie implements Parcelable {
         dest.writeDouble(viewerRatings);
         dest.writeString(overview);
         dest.writeString(releasedDate);
-        dest.writeString(posterImage);
+        dest.writeString(posterUrl);
         dest.writeString(backdropUrl);
     }
 

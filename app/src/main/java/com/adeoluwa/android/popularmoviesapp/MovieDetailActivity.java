@@ -41,18 +41,6 @@ public class MovieDetailActivity extends AppCompatActivity {
         String vote_average = String.valueOf(movie.getViewerRatings()) + "/10";
         mVoteAverage.setText(vote_average);
 
-        Picasso.with(getBaseContext()).load(movie.getPosterImage())
-                .networkPolicy(NetworkPolicy.OFFLINE).resize(300, 300).into(mMovieBackDrop);
+        Picasso.with(getBaseContext()).load(movie.getBackdropUrl()).resize(300, 400).into(mMovieBackDrop);
     }
-
-   /* private void setDetails(Movie details) {
-        mOriginalTitle.setText(details.getMovieTitle());
-        mOverview.setText(details.getOverview());
-
-        mReleaseDate.setText(details.getReleasedDate());
-        mVoteAverage.setText(String.valueOf(details.getViewerRatings()));
-
-        Picasso.with(getBaseContext()).load(details.getBackdropUrl())
-                .networkPolicy(NetworkPolicy.OFFLINE).resize(300, 300).into(mMovieBackDrop);
-    }*/
 }
