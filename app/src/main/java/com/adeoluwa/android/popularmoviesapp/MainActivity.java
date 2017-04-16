@@ -46,8 +46,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
 
         if (isConnected())
             getMovies();
-        //else
-            //setNoConnectionLayout();
+
     }
 
     @Override
