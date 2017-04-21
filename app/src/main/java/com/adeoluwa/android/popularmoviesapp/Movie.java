@@ -24,7 +24,7 @@ public class Movie implements Parcelable {
         overview = summary;
         releasedDate = date;
         posterUrl = POSTER_URL + relativePath;
-        backdropUrl = POSTER_URL + relativePath;
+        backdropUrl = BACKDROP_IMAGE_URL + relativePath;
     }
 
     protected Movie(Parcel in) {
