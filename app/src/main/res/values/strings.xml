@@ -8,5 +8,5 @@
     <string name="settings">Settings</string>
     <string name="star_desc">star ratings logo</string>
 
-    <string name="api_key">188c21dbc838fb5c8cee71e9e5a7bcff</string>
+    <string name="api_key">[REPLACE_WITH_API_KEY_OBTAINED]</string>
 </resources>
