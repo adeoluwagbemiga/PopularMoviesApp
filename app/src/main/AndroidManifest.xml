@@ -25,6 +25,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
+        <provider
+            android:authorities="com.adeoluwa.android.popularmoviesapp"
+            android:name=".data.PopularMoviesProvider"
+            android:exported="false"/>
     </application>
 
 </manifest>

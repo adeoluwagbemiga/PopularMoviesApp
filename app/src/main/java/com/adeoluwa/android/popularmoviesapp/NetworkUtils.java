@@ -71,4 +71,44 @@ public class NetworkUtils {
         }
         return null;
     }
+
+    public static URL buildReviewUrl(String id, Context context) {
+        MOVIE_BASE_URL = context.getString(R.string.base_url);
+        PARAM_API = context.getString(R.string.api_param);
+        API_KEY = context.getString(R.string.api_key);
+
+        Uri builtUri = Uri.parse(MOVIE_BASE_URL).buildUpon()
+                .appendEncodedPath(id).appendEncodedPath("reviews")
+                .appendQueryParameter(PARAM_API, API_KEY)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        return url;
+    }
+
+    public static URL buildTrailerUrl(String id, Context context) {
+        MOVIE_BASE_URL = context.getString(R.string.base_url);
+        PARAM_API = context.getString(R.string.api_param);
+        API_KEY = context.getString(R.string.api_key);
+
+        Uri builtUri = Uri.parse(MOVIE_BASE_URL).buildUpon()
+                .appendEncodedPath(id).appendEncodedPath("videos")
+                .appendQueryParameter(PARAM_API, API_KEY)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        return url;
+    }
 }

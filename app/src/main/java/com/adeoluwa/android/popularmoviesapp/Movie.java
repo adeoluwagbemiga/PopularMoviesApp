@@ -8,6 +8,7 @@ import android.os.Parcelable;
  */
 
 public class Movie implements Parcelable {
+    private int movieId;
     private String movieTitle;
     private double viewerRatings;
     private String overview;
@@ -16,9 +17,11 @@ public class Movie implements Parcelable {
     private String backdropUrl;
     private final static String POSTER_URL = "https://image.tmdb.org/t/p/w185";
     private final static String BACKDROP_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
+    private byte[] MOVIE_POSTER;
 
-    public Movie(String title, double ratings,
+    public Movie(int id, String title, double ratings,
                  String summary, String date, String relativePath){
+        movieId = id;
         movieTitle = title;
         viewerRatings = ratings;
         overview = summary;
@@ -28,6 +31,7 @@ public class Movie implements Parcelable {
     }
 
     protected Movie(Parcel in) {
+        movieId = in.readInt();
         movieTitle = in.readString();
         viewerRatings = in.readDouble();
         overview = in.readString();
@@ -72,6 +76,9 @@ public class Movie implements Parcelable {
 
         return movieTitle;
     }
+    public int getMovieId(){
+        return movieId;
+    }
 
     @Override
     public int describeContents() {
@@ -80,12 +87,14 @@ public class Movie implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(movieId);
         dest.writeString(movieTitle);
         dest.writeDouble(viewerRatings);
         dest.writeString(overview);
         dest.writeString(releasedDate);
         dest.writeString(posterUrl);
         dest.writeString(backdropUrl);
+
     }
 
 }

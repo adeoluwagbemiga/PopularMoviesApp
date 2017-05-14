@@ -3,79 +3,153 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/movie_backdrop"
-        android:scaleType="fitXY"
-        android:layout_margin="0dp"
-        android:layout_weight="4"
-        android:contentDescription="Movie Poster" />
-
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="3">
-
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Original Title"
-                android:id="@+id/movie_title"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:fontFamily="san-serif" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Vote Average"
-                android:id="@+id/vote_average"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:textColor="@color/colorAccent"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="4dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Overview"
-                android:id="@+id/overview"
-                android:layout_marginTop="8dp"
-                android:inputType="textMultiLine"
-                android:textColor="@android:color/black"
-                android:fontFamily="san-serif" />
-
-            <RelativeLayout
+            android:orientation="vertical">
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:id="@+id/movie_backdrop"
+                android:scaleType="fitXY"
+                android:layout_margin="0dp"
+                android:layout_weight="4"
+                android:contentDescription="Movie Poster" />
 
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                card_view:cardElevation="8dp"
+                card_view:cardCornerRadius="8dp"
+                card_view:cardBackgroundColor="@color/colorPrimaryDark">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Original Title"
+                        android:id="@+id/movie_title"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:fontFamily="san-serif" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Vote Average"
+                        android:id="@+id/vote_average"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/colorAccent"
+                        android:fontFamily="sans-serif"
+                        android:textStyle="bold"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginLeft="4dp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:minHeight="0.5dp"
+                        android:background="@color/colorWhite"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Overview"
+                        android:id="@+id/overview"
+                        android:layout_marginTop="8dp"
+                        android:inputType="textMultiLine"
+                        android:textColor="@android:color/white"
+                        android:fontFamily="san-serif" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:minHeight="0.5dp"
+                        android:background="@color/colorWhite"/>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="Release Date"
+                            android:id="@+id/release_date"
+                            android:fontFamily="sans-serif"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorWhite"
+                            android:layout_centerVertical="true" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical" android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="5dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Release Date"
-                    android:id="@+id/release_date"
-                    android:fontFamily="sans-serif"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Reviews"
+                    android:id="@+id/movie_movie_review_title"
+                    android:textColor="@android:color/white"
                     android:textStyle="bold"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:layout_centerVertical="true" />
-            </RelativeLayout>
+                    android:fontFamily="san-serif" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_movie_reviews"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical" android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="5dp">
+                <TextView
+                    android:id="@+id/movie_trailer_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/white"
+                    android:text="Trailers"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:fontFamily="san-serif"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_movie_trailers"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

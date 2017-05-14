@@ -39,16 +39,16 @@ public class MovieAsyncTask extends AsyncTask<URL, Void, JSONObject> {
     }
     @Override
     protected JSONObject doInBackground(URL... params) {
-        String r = "";
+        String result = "";
         try {
-            r = NetworkUtils.getResponseFromHttpUrl(params[0]);
+            result = NetworkUtils.getResponseFromHttpUrl(params[0]);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            if(r.isEmpty() || r == null) return new JSONObject();
-            return new JSONObject(r);
+            if(result == null || result.isEmpty()) return new JSONObject();
+            return new JSONObject(result);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -75,11 +75,13 @@ public class MovieAsyncTask extends AsyncTask<URL, Void, JSONObject> {
                 String releaseDate = movie.getString("release_date");
                 String posterPath = movie.getString("poster_path");
                 String overview = movie.getString("overview");
+                int id = movie.getInt("id");
 
-                mMovieList.add(new Movie(movieTitle, voteAverage, overview, releaseDate, posterPath));
+                mMovieList.add(new Movie(id, movieTitle, voteAverage, overview, releaseDate, posterPath));
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
+
 }
