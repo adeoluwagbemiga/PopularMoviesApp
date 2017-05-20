@@ -4,18 +4,19 @@
     android:layout_height="wrap_content"
     android:background="@android:color/white">
 
-    <LinearLayout
+    <GridLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
+       <!-- android:layout_width="@dimen/moviItem_iv_width"-->
         <ImageView
             android:id="@+id/rv_image"
-            android:layout_width="@dimen/moviItem_iv_width"
+            android:adjustViewBounds="true"
             android:layout_height="@dimen/moviItem_iv_height"
             android:contentDescription="@string/movieItem_iv_contentDescr"
             android:background="@color/background"
             android:scaleType="fitXY" />
-    </LinearLayout>
+    </GridLayout>
 
 </FrameLayout>

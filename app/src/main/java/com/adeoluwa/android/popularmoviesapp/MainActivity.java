@@ -7,12 +7,14 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Parcelable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
     private static String mSortType = "popular";
     private ProgressBar mProgressBar;
     private static int mAdapterPosition = 0;
+    private GridLayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
         mMovieList = new ArrayList<>();
         mMovieRecyclerView = (RecyclerView) findViewById(R.id.rv_movies);
 
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        layoutManager = new GridLayoutManager(this, 2);
 
         mMovieRecyclerView.setLayoutManager(layoutManager);
         mMovieRecyclerView.setHasFixedSize(true);
@@ -57,8 +60,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
             layoutManager.setSpanCount(4);
         }
 
-        mMovieRecyclerView.scrollToPosition(mAdapterPosition);
+        if(savedInstanceState != null && savedInstanceState.containsKey("scrollposition")){
+            mAdapterPosition = savedInstanceState.getInt("scrollposition");
+        }
 
+        mMovieRecyclerView.scrollToPosition(mAdapterPosition);
 
         if(savedInstanceState != null && savedInstanceState.containsKey("sorttype")){
             mSortType = savedInstanceState.getString("sorttype");
@@ -75,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
         super.onSaveInstanceState(outState);
         outState.putString("sorttype", mSortType);
         outState.putInt("adapterposition", mAdapterPosition);
+        outState.putInt("scrollposition", layoutManager.findFirstVisibleItemPosition());
     }
 
 
@@ -166,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
         mMovieRecyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         mMovieRecyclerView.scrollToPosition(mAdapterPosition);
+
     }
 
     @Override
@@ -182,7 +190,24 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
             queryBundle.putString("queryString", queryString);
             getSupportLoaderManager().initLoader(0,queryBundle,this);
         }
-        //getSupportLoaderManager().initLoader(0, null, this);
+
+    }
+
+    /*@Override
+    protected void onPause() {
+        super.onPause();
+        Bundle viewState = new Bundle();
+        mMovieListState = mMovieRecyclerView.getLayoutManager().onSaveInstanceState();
+        viewState.putParcelable("liststate", mMovieListState);
+    }*/
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        if(savedInstanceState != null && savedInstanceState.containsKey("scrollposition")){
+            mAdapterPosition = savedInstanceState.getInt("scrollposition");
+        }
     }
 
     @Override
@@ -194,7 +219,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
             queryBundle.putString("queryString", queryString);
             getSupportLoaderManager().restartLoader(0,queryBundle,this);
         }
-        //getSupportLoaderManager().restartLoader(0,null,this);
     }
 
 

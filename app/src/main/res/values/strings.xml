@@ -12,7 +12,7 @@
     <string name="star_desc">star ratings logo</string>
 
 
-    <string name="api_key">[REPLACE_WITH_API_KEY_OBTAINED]</string>
+   <string name="api_key">[REPLACE_WITH_API_KEY_OBTAINED]</string>
 
     <string name="detail_iv_contentDescr">Movie Poster</string>
     <string name="movie_title">Original Title</string>

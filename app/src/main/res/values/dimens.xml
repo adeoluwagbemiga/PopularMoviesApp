@@ -18,7 +18,7 @@
     <dimen name="vote_average_marginRight">8dp</dimen>
     <dimen name="divider_viewHeight">0.3dp</dimen>
     <dimen name="overview_text_marginTop">3dp</dimen>
-    <dimen name="moviItem_iv_width">185dp</dimen>
+    <dimen name="moviItem_iv_width">170dp</dimen>
     <dimen name="moviItem_iv_height">200dp</dimen>
     <dimen name="review_text_marginTop">3dp</dimen>
 </resources>
