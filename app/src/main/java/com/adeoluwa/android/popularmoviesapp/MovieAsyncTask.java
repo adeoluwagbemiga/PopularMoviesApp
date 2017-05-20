@@ -56,7 +56,7 @@ public class MovieAsyncTask extends AsyncTask<URL, Void, JSONObject> {
     }
     @Override
     public void onPostExecute(JSONObject jsonObject){
-        JsonParser(jsonObject);
+        //JsonParser(jsonObject);
         mProgressBar.setVisibility(View.INVISIBLE);
         adapter = new MovieAdapter(mMovieList, (MovieAdapter.ListItemClickListener) mContext);
         mMovieRecyclerView.setAdapter(adapter);
@@ -77,7 +77,7 @@ public class MovieAsyncTask extends AsyncTask<URL, Void, JSONObject> {
                 String overview = movie.getString("overview");
                 int id = movie.getInt("id");
 
-                mMovieList.add(new Movie(id, movieTitle, voteAverage, overview, releaseDate, posterPath));
+                //mMovieList.add(new Movie(id, movieTitle, voteAverage, overview, releaseDate, posterPath));
             }
         } catch (JSONException e) {
             e.printStackTrace();

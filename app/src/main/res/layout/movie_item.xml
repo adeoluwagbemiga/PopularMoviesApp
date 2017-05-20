@@ -7,14 +7,13 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="0dp">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/rv_image"
-            android:layout_width="185dp"
-            android:layout_height="200dp"
-            android:contentDescription="Movie Poster"
+            android:layout_width="@dimen/moviItem_iv_width"
+            android:layout_height="@dimen/moviItem_iv_height"
+            android:contentDescription="@string/movieItem_iv_contentDescr"
             android:background="@color/background"
             android:scaleType="fitXY" />
     </LinearLayout>

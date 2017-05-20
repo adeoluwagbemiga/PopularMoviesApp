@@ -20,7 +20,7 @@ public class PopularMoviesDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        final String SQL_CREATE_WEATHER_TABLE =
+        final String SQL_CREATE_MOVIES_TABLE =
 
                 "CREATE TABLE " + PopularMoviesEntry.TABLE_NAME + " (" +
                         PopularMoviesEntry.COLUMN_MOVIE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -34,7 +34,7 @@ public class PopularMoviesDbHelper extends SQLiteOpenHelper {
                         " UNIQUE (" + PopularMoviesEntry.COLUMN_MOVIE_ID + ") ON CONFLICT REPLACE);";
 
 
-        sqLiteDatabase.execSQL(SQL_CREATE_WEATHER_TABLE);
+        sqLiteDatabase.execSQL(SQL_CREATE_MOVIES_TABLE);
     }
 
     @Override

@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Movies App</string>
+    <string name="app_detail">Movie Detail</string>
     <string name="action_popular">Most Popular</string>
     <string name="action_topRated">Top Rated</string>
-    <string name="action_favorite">Favorite</string>
+    <string name="action_favorite">Favorites</string>
     <string name="action_share">Share</string>
 
     <string name="base_url">https://api.themoviedb.org/3/movie/</string>
@@ -12,4 +13,26 @@
 
 
     <string name="api_key">[REPLACE_WITH_API_KEY_OBTAINED]</string>
+
+    <string name="detail_iv_contentDescr">Movie Poster</string>
+    <string name="movie_title">Original Title</string>
+    <string name="overview_title">Overview</string>
+    <string name="overview">Overview</string>
+    <string name="vote_average">Vote Average</string>
+    <string name="trailer_title">Trailers</string>
+    <string name="review_title">Reviews</string>
+    <string name="movieItem_iv_contentDescr">Movie Poster</string>
+    <string name="review_text">Review</string>
+    <string name="reviewer_text">Reviewer</string>
+    <string name="trailerVideo_type">Type</string>
+    <string name="network_message">Please Check device Network. Your Favorite Movies Loaded</string>
+    <string name="empty_favorite_message">No Favorite Movie Record found</string>
+    <string name="vote_average_denominator">/10</string>
+    <string name="no_trailers_info">No Trailers Loaded</string>
+    <string name="no_reviews_info">No Reviews Loaded</string>
+    <string name="no_network_message">Please Check device Network</string>
+    <string name="success_favorite_message"> Favorited!</string>
+    <string name="failure_favorite_message">Could not Favorite </string>
+    <string name="success_unfavorite_message"> Unfavorited!</string>
+    <string name="failure_unfavorite_message">Could not Unfavorite </string>
 </resources>

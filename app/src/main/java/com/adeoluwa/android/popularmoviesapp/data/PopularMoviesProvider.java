@@ -47,8 +47,8 @@ public class PopularMoviesProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)) {
 
             case CODE_MOVIES_WITH_ID: {
-                String normalizedUtcDateString = uri.getLastPathSegment();
-                String[] selectionArguments = new String[]{normalizedUtcDateString};
+                String idString = uri.getLastPathSegment();
+                String[] selectionArguments = new String[]{idString};
 
                 cursor = mOpenHelper.getReadableDatabase().query(
                         PopularMoviesContract.PopularMoviesEntry.TABLE_NAME,

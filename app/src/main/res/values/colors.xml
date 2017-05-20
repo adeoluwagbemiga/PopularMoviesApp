@@ -6,6 +6,8 @@
     <color name="colorPrimaryDark">#344152</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#ffffff</color>
+   <!-- <color name="background">#77ffffff</color>-->
     <color name="background">#344152</color>
     <color name="background_detail_color">#d5d5d5</color>
+    <color name="black_transparent">#77000000</color>
 </resources>

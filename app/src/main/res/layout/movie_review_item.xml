@@ -7,38 +7,45 @@
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        card_view:cardElevation="8dp"
-        card_view:cardCornerRadius="8dp"
-        card_view:cardBackgroundColor="@color/colorPrimaryDark">
+        android:padding="@dimen/detail_Lin_padding"
+        card_view:cardElevation="@dimen/card_elevation"
+        card_view:cardCornerRadius="@dimen/corner_radius"
+        card_view:cardBackgroundColor="@color/colorPrimary">
 
-        <LinearLayout
-            android:orientation="horizontal"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="0dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Review"
-            android:layout_gravity="left"
-            android:id="@+id/movie_review"
-            android:textColor="@android:color/white"
-            android:fontFamily="san-serif" />
+            android:padding="@dimen/detail_Lin_padding">
 
             <TextView
-                android:id="@+id/movie_reviewer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:fontFamily="san-serif"
-                android:text="Reviewer"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/review_text"
+                android:id="@+id/movie_review"
+                android:layout_marginTop="@dimen/review_text_marginTop"
+                android:inputType="textMultiLine"
                 android:textColor="@android:color/white"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:fontFamily="san-serif" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="@dimen/divider_viewHeight"
+                android:id="@+id/divider_view"
+                android:layout_below="@id/movie_review"
+                android:background="@color/colorWhite"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/reviewer_text"
+                android:layout_below="@id/divider_view"
+                android:id="@+id/movie_reviewer"
+                android:layout_marginTop="@dimen/review_text_marginTop"
+                android:inputType="textMultiLine"
+                android:textColor="@android:color/white"
+                android:fontFamily="san-serif" />
+        </RelativeLayout>
 
     </android.support.v7.widget.CardView>
 

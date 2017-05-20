@@ -13,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,9 +21,7 @@ import android.widget.Toast;
 
 import com.adeoluwa.android.popularmoviesapp.data.PopularMoviesContract;
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MovieAdapter.ListItemClickListener,
@@ -35,9 +32,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
     private MovieAdapter adapter;
     private final static String MOST_POPULAR_MOVIES = "popular";
     private final static String TOP_RATED_MOVIES = "top_rated";
+    private final static String FAVORITE_MOVIES = "favorites";
     private static String mSortType = "popular";
     private ProgressBar mProgressBar;
-    private boolean mFavorite;
+    private static int mAdapterPosition = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,18 +57,34 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
             layoutManager.setSpanCount(4);
         }
 
+        mMovieRecyclerView.scrollToPosition(mAdapterPosition);
+
+
+        if(savedInstanceState != null && savedInstanceState.containsKey("sorttype")){
+            mSortType = savedInstanceState.getString("sorttype");
+        }
         checkConnectionToLoadMovies();
         if(getSupportLoaderManager().getLoader(0)!=null){
             getSupportLoaderManager().initLoader(0,null,this);
         }
+        if(getSupportActionBar() != null) getSupportActionBar().setTitle(mSortType.toUpperCase());
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("sorttype", mSortType);
+        outState.putInt("adapterposition", mAdapterPosition);
+    }
+
+
 
     @Override
     public void onItemClick(int position, byte[] movieposter) {
         Intent intent = new Intent(this, MovieDetailActivity.class);
         intent.putExtra("movie", mMovieList.get(position));
         intent.putExtra("movieposter", movieposter);
-        intent.putExtra("favorite", mFavorite);
+        mAdapterPosition = position;
 
         startActivity(intent);
     }
@@ -80,22 +95,25 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
         NetworkInfo activeNetInfo = con.getActiveNetworkInfo();
         return activeNetInfo != null && activeNetInfo.isConnected();
     }
-    private void getMovies() {
+    /*private void getMovies() {
         URL movierepoURL = NetworkUtils.buildUrl(mSortType, MainActivity.this);
         MovieAsyncTask asyncTask = new MovieAsyncTask(mProgressBar, mMovieList, mMovieRecyclerView, adapter, MainActivity.this);
         asyncTask.execute(movierepoURL);
-    }
+    }*/
     public void checkConnectionToLoadMovies(){
         if (isConnected()){
             String queryString = mSortType;
             Bundle queryBundle = new Bundle();
             queryBundle.putString("queryString", queryString);
             getSupportLoaderManager().restartLoader(0, queryBundle, this);
-            //getMovies();
+
         }else{
-            mProgressBar.setVisibility(View.VISIBLE);
-            Toast.makeText(this, "Check device Network", Toast.LENGTH_LONG).show();
+            //mProgressBar.setVisibility(View.VISIBLE);
+            mSortType = FAVORITE_MOVIES;
+            loadFavorites();
+            Toast.makeText(this, getString(R.string.network_message), Toast.LENGTH_LONG).show();
         }
+
     }
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -109,29 +127,34 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        mMovieList.clear();
+        mMovieList = new ArrayList<>();
+        adapter = new MovieAdapter(mMovieList, this);
+        mMovieRecyclerView.setAdapter(adapter);
         //noinspection SimplifiableIfStatement
        if (id == R.id.action_popular) {
            mSortType = MOST_POPULAR_MOVIES;
+           if(getSupportActionBar() != null) getSupportActionBar().setTitle(mSortType.toUpperCase());
            checkConnectionToLoadMovies();
-           mFavorite = false;
             return true;
         }else if(id == R.id.action_toprated){
            mSortType = TOP_RATED_MOVIES;
+           String title = mSortType.replace(mSortType, "TOP RATED").toUpperCase();
+           if(getSupportActionBar() != null) getSupportActionBar().setTitle(title);
            checkConnectionToLoadMovies();
-           mFavorite = false;
            return true;
        }else if(id == R.id.action_favorite){
-           loadFavorites();
-           mFavorite = true;
+           mSortType = FAVORITE_MOVIES;
+           //loadFavorites();
+           if(getSupportActionBar() != null) getSupportActionBar().setTitle(mSortType.toUpperCase());
+           checkConnectionToLoadMovies();
            return true;
        }
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
     public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
+        mProgressBar.setVisibility(View.VISIBLE);
         return new MovieAsyncTaskLoader(this, args.getString("queryString"));
     }
 
@@ -141,6 +164,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
         mMovieList = data;
         adapter = new MovieAdapter(mMovieList, (MovieAdapter.ListItemClickListener) this);
         mMovieRecyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        mMovieRecyclerView.scrollToPosition(mAdapterPosition);
     }
 
     @Override
@@ -151,14 +176,27 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
     @Override
     protected void onStart() {
         super.onStart();
-        //getSupportLoaderManager().initLoader(0,null,this);
+        if(getSupportLoaderManager().getLoader(0)!=null){
+            String queryString = mSortType;
+            Bundle queryBundle = new Bundle();
+            queryBundle.putString("queryString", queryString);
+            getSupportLoaderManager().initLoader(0,queryBundle,this);
+        }
+        //getSupportLoaderManager().initLoader(0, null, this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        if(getSupportLoaderManager().getLoader(0)!=null){
+            String queryString = mSortType;
+            Bundle queryBundle = new Bundle();
+            queryBundle.putString("queryString", queryString);
+            getSupportLoaderManager().restartLoader(0,queryBundle,this);
+        }
         //getSupportLoaderManager().restartLoader(0,null,this);
     }
+
 
     private void loadFavorites(){
 
@@ -175,7 +213,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
                 String releaseDate =cursor.getString(cursor.getColumnIndex(PopularMoviesContract.PopularMoviesEntry.COLUMN_RELEASE_DATE));
                 double voteAverage =cursor.getDouble(cursor.getColumnIndex(PopularMoviesContract.PopularMoviesEntry.COLUMN_USER_RATING));
                 String posterPath =cursor.getString(cursor.getColumnIndex(PopularMoviesContract.PopularMoviesEntry.COLUMN_POSTER_PATH));
-                mMovieList.add(new Movie(id, movieTitle, voteAverage, overview, releaseDate, posterPath));
+                byte[] poster = cursor.getBlob(cursor.getColumnIndex(PopularMoviesContract.PopularMoviesEntry.COLUMN_POSTER));
+                mMovieList.add(new Movie(id, movieTitle, voteAverage, overview, releaseDate, posterPath, poster));
                 cursor.moveToNext();
             }
             mProgressBar.setVisibility(View.INVISIBLE);
@@ -184,7 +223,18 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
             cursor.close();
         }else{
             mProgressBar.setVisibility(View.VISIBLE);
-            Toast.makeText(this, "No Favorite Record in the Database", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.empty_favorite_message), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(getSupportLoaderManager().getLoader(0)!=null){
+            String queryString = mSortType;
+            Bundle queryBundle = new Bundle();
+            queryBundle.putString("queryString", queryString);
+            getSupportLoaderManager().initLoader(0, queryBundle, this);
         }
     }
 }

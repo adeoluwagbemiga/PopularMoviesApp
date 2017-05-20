@@ -1,9 +1,12 @@
 package com.adeoluwa.android.popularmoviesapp;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,10 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.adeoluwa.android.popularmoviesapp.data.PopularMoviesContract;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -29,6 +35,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     private List<Movie> list;
     private Context context;
     private byte[] mMoviesPoster;
+
+
     public interface ListItemClickListener{
         void onItemClick(int position, byte[] movieposter);
     }
@@ -74,11 +82,19 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
         void bind(int index){
             Movie movie = list.get(index);
-            Picasso.with(context)
-                    .load(movie.getPosterUrl())
-                    .placeholder(R.mipmap.futurestudio_logo_transparent)
-                    .error(R.mipmap.futurestudio_logo_transparent)
-                    .resize(185, 200).into(poster);
+
+            if (inProviderMovies(movie.getMovieId())) {
+                getImage(movie.getMovieId());
+            }
+            else {
+                Picasso.with(context)
+                        .load(movie.getPosterUrl())
+                        .placeholder(R.mipmap.ic_launcher_2)
+                        .error(R.mipmap.ic_launcher_2)
+                        .resize(185, 200).into(poster);
+
+            }
+
         }
 
         @Override
@@ -91,5 +107,40 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
             mListClickListener.onItemClick(itemClickedIndex, mMoviesPoster);
         }
+
+        private void getImage(int movieId){
+            //Cursor cursor = getContentResolver().query(PopularMoviesContract.PopularMoviesEntry.CONTENT_URI, null, null, null, null);
+            String itemtofetch = PopularMoviesContract.PopularMoviesEntry.COLUMN_MOVIE_ID + " = " + movieId;
+            Cursor cursor = context.getContentResolver().query(PopularMoviesContract.PopularMoviesEntry.CONTENT_URI, null, itemtofetch, null, null);
+            if (cursor != null) {
+                if (cursor.moveToFirst()) {
+                    int indexposter = cursor.getColumnIndex(PopularMoviesContract.PopularMoviesEntry.COLUMN_POSTER);
+                    Bitmap btmapposter = BitmapFactory.decodeByteArray(cursor.getBlob(indexposter), 0, cursor.getBlob(indexposter).length);
+                    cursor.close();
+                    poster.setImageBitmap(btmapposter);
+                }
+
+            }
+        }
+
+        private boolean inProviderMovies(int id) {
+            ContentResolver resolver = context.getContentResolver();
+            Cursor cursor = resolver.query(PopularMoviesContract.PopularMoviesEntry.CONTENT_URI, null, null, null, null);
+            boolean isfavorite;
+            if (cursor != null && cursor.getCount() > 0) {
+                List<Integer> movieId = new ArrayList<>();
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    movieId.add(cursor.getInt(cursor.getColumnIndex(PopularMoviesContract.PopularMoviesEntry.COLUMN_MOVIE_ID)));
+                    cursor.moveToNext();
+                }
+                cursor.close();
+                isfavorite = movieId.contains(id);
+            } else {
+                isfavorite = false;
+            }
+            return isfavorite;
+        }
     }
+
 }

@@ -80,8 +80,8 @@ public class TrailerVideoAdapter extends RecyclerView.Adapter<TrailerVideoAdapte
             String url = THUMBNAIL_BASE_URL + trailerVideo.getTrailerKey() + THUMBNAIL_END_URL;
             Picasso.with(context)
                     .load(url)
-                    .placeholder(R.mipmap.futurestudio_logo_transparent)
-                    .error(R.mipmap.futurestudio_logo_transparent).into(mMovieVideoPoster);
+                    .placeholder(R.mipmap.ic_launcher_2)
+                    .error(R.mipmap.ic_launcher_2).into(mMovieVideoPoster);
         }
 
         @Override

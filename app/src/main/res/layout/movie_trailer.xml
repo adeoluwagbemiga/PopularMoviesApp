@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <TextView
-        android:id="@+id/movie_trailer_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-smallcaps"
-        android:textSize="20sp"
-        android:background="@color/cardview_dark_background"
-        android:textColor="@color/colorAccent"
-        android:text="Trailers"/>
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/trailer_title"
+        android:id="@+id/movie_trailer_header"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:fontFamily="san-serif" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_movie_trailers"
