@@ -22,8 +22,8 @@
         android:fontFamily="sans-serif"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textColor="@color/colorWhite"
-        android:layout_gravity="left"
-        android:text="Name"/>
+        android:layout_gravity="start"
+        android:text="@string/name"/>
 
     <TextView
         android:id="@+id/movie_trailer_type"
@@ -40,6 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/background"
+        android:contentDescription="@string/movieItem_iv_contentDescr"
         android:layout_below="@id/movie_trailer_type"
         android:scaleType="fitXY"/>
         </RelativeLayout>

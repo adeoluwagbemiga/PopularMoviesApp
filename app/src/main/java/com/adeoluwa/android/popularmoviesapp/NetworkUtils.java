@@ -3,6 +3,7 @@ package com.adeoluwa.android.popularmoviesapp;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,7 +28,7 @@ public class NetworkUtils {
 
         Uri builtUri = Uri.parse(MOVIE_BASE_URL).buildUpon()
                 .appendEncodedPath(sortBy)
-                .appendQueryParameter(PARAM_API, API_KEY)
+                .appendQueryParameter(PARAM_API, API_KEY)//.appendQueryParameter("page", "20")
                 .build();
 
         URL url = null;
@@ -65,7 +66,7 @@ public class NetworkUtils {
             }
         }catch (Exception e)
         {
-
+            Log.e("", e.getMessage());
         } finally {
             urlConnection.disconnect();
         }

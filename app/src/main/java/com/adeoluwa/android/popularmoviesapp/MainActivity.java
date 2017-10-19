@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Parcelable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
@@ -69,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
         if(savedInstanceState != null && savedInstanceState.containsKey("sorttype")){
             mSortType = savedInstanceState.getString("sorttype");
         }
+
+
         checkConnectionToLoadMovies();
         if(getSupportLoaderManager().getLoader(0)!=null){
             getSupportLoaderManager().initLoader(0,null,this);
@@ -88,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
 
     @Override
     public void onItemClick(int position, byte[] movieposter) {
-        Intent intent = new Intent(this, MovieDetailActivity.class);
+        Intent intent = new Intent(MainActivity.this, MovieDetailActivity.class);
         intent.putExtra("movie", mMovieList.get(position));
         intent.putExtra("movieposter", movieposter);
         mAdapterPosition = position;

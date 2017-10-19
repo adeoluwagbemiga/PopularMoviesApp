@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Movies App</string>
+    <string name="app_name">Muvis</string>
     <string name="app_detail">Movie Detail</string>
     <string name="action_popular">Most Popular</string>
     <string name="action_topRated">Top Rated</string>
@@ -12,15 +12,17 @@
     <string name="star_desc">star ratings logo</string>
 
 
-   <string name="api_key">[REPLACE_WITH_API_KEY_OBTAINED]</string>
+   <!--<string name="api_key">[REPLACE_WITH_API_KEY_OBTAINED]</string>-->
 
     <string name="detail_iv_contentDescr">Movie Poster</string>
     <string name="movie_title">Original Title</string>
+    <string name="name">Name</string>
     <string name="overview_title">Overview</string>
     <string name="overview">Overview</string>
     <string name="vote_average">Vote Average</string>
     <string name="trailer_title">Trailers</string>
     <string name="review_title">Reviews</string>
+    <string name="release_date">Release Date</string>
     <string name="movieItem_iv_contentDescr">Movie Poster</string>
     <string name="review_text">Review</string>
     <string name="reviewer_text">Reviewer</string>

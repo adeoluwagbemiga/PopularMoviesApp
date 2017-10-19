@@ -147,7 +147,7 @@ public class MovieDetailActivity extends AppCompatActivity implements TrailerVid
                         mReviewAdapter = new ReviewAdapter(mReviewList);
                         mReviewRecyclerView.setAdapter(mReviewAdapter);
                     } else {
-                        mReviewHeader.setText("No Reviews");
+                        mReviewHeader.setText(getString(R.string.no_reviews_info));
                     }
                 }
 
@@ -169,7 +169,7 @@ public class MovieDetailActivity extends AppCompatActivity implements TrailerVid
                         mTrailerVideoAdapter = new TrailerVideoAdapter(mTrailerList, (TrailerVideoAdapter.ListItemClickListener) MovieDetailActivity.this);
                         mTrailerRecyclerView.setAdapter(mTrailerVideoAdapter);
                     } else {
-                        mTrailerHeader.setText("No Trailers");
+                        mTrailerHeader.setText(getString(R.string.no_trailers_info));
                     }
                 }
 
